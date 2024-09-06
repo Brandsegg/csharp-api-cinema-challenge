@@ -16,12 +16,12 @@ namespace api_cinema_challenge.Repositories
 
         public async Task<Customer> AddCustomer(Customer entity)
         {
-            await _db.AddAsync(entity);
+            await _db.Customers.AddAsync(entity);
             await _db.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<Customer> DeleteById(int id)
+        public async Task<Customer> DeleteCustomerById(int id)
         {
             var customer = await GetById(id);
             _db.Customers.Remove(customer);
@@ -40,7 +40,7 @@ namespace api_cinema_challenge.Repositories
             return await _db.Customers.ToListAsync();
         }
 
-        public async Task<Customer> UpdateById(int id, Customer entity)
+        public async Task<Customer> UpdateCustomerById(int id, Customer entity)
         {
 
             _db.Attach(entity).State = EntityState.Modified;

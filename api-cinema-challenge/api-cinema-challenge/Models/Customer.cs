@@ -2,16 +2,16 @@
 
 namespace api_cinema_challenge.Models
 {
-    [Table("customer")]
+    //[Table("customer")]
     public class Customer
     {
-        [Column("id")]
+        //[Column("id")]
         public int id { get; set; }
-        [Column("name")]
+        //[Column("name")]
         public string name { get; set; }
-        [Column("email")]
+        //[Column("email")]
         public string email { get; set; }
-        [Column("phone")]
+       // [Column("phone")]
         public string phone { get; set; }
     }
 }

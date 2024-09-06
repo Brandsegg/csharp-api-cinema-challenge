@@ -369,3 +369,5 @@ FodyWeavers.xsd
 */**/obj/Debug   
 */**/obj/Release
 /api-cinema-challenge/api-cinema-challenge/appsettings.json
+/api-cinema-challenge/api-cinema-challenge/Migrations/20240906114541_FirstMigration.cs
+/api-cinema-challenge/api-cinema-challenge/Migrations/CinemaContextModelSnapshot.cs

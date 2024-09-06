@@ -9,6 +9,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CinemaContext>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IScreeningRepository, ScreeningRepository>();
 
 var app = builder.Build();
 
@@ -20,6 +22,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.ConfigureCustomerEndPoints();
+app.ConfigureMovieEndPoints();
+app.ConfigureScreeningEndPoints();
 
 app.UseHttpsRedirection();
 app.Run();

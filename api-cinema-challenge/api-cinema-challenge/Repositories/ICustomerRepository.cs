@@ -7,7 +7,7 @@ namespace api_cinema_challenge.Repositories
         Task<List<Customer>> GetCustomers();
         Task<Customer> GetById(int id);
         Task<Customer> AddCustomer(Customer entity);
-        Task<Customer> UpdateById(int id, Customer entity);
-        Task<Customer> DeleteById(int id);
+        Task<Customer> UpdateCustomerById(int id, Customer entity);
+        Task<Customer> DeleteCustomerById(int id);
     }
 }
