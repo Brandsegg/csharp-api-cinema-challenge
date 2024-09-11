@@ -31,6 +31,8 @@ namespace api_cinema_challenge.EndPoints
             });
         }
 
+
+        //fix here
         private static async Task<IResult> GetMovies(IMovieRepository repo)
         {
             //change to avoid cyclical reference
@@ -40,19 +42,16 @@ namespace api_cinema_challenge.EndPoints
         }
 
 
+        //works without the screenings
         [ProducesResponseType(StatusCodes.Status201Created)]
         private static async Task<IResult> AddMovie(IMovieRepository repo, MoviePostModel model)
         {
             try
             {
-                var result = await repo.AddMovie(new Movie() { 
-                    title = model.title,
-                    rating = model.rating,
-                    description = model.description,
-                    runtimeMins = model.runtimeMins
-                });
+                Payload<Movie> response = new Payload<Movie>();
+                response.data = await repo.AddMovie(new Movie() { title = model.title, rating = model.rating, description = model.description });
 
-                return TypedResults.Ok(result);
+                return TypedResults.Ok(response);
             }
             catch (Exception ex)
             {
@@ -63,6 +62,8 @@ namespace api_cinema_challenge.EndPoints
         [ProducesResponseType(StatusCodes.Status201Created)]
         private static async Task<IResult> UpdateMovie(IMovieRepository repo, int id, MoviePutModel model)
         {
+
+            Payload<Movie> response = new Payload<Movie>();
             try
             {
                 var target = await repo.GetMovieById(id);
@@ -72,8 +73,9 @@ namespace api_cinema_challenge.EndPoints
                 target.description = string.IsNullOrEmpty(model.description) ? target.description : model.description;
                 target.runtimeMins = model.runtimeMins <= 0 ? target.runtimeMins : model.runtimeMins;
 
-                await repo.UpdateMovieById(target, id);
-                return TypedResults.Ok(target);
+                
+                response.data = await repo.UpdateMovieById(target, id);
+                return TypedResults.Ok(response);
             }
             catch (Exception ex)
             {
@@ -84,9 +86,12 @@ namespace api_cinema_challenge.EndPoints
         [ProducesResponseType(StatusCodes.Status200OK)]
         private static async Task<IResult> DeleteMovie(IMovieRepository repo, int id)
         {
-            var deletedMovie = await repo.DeleteMovieById(id);
 
-            return TypedResults.Ok(deletedMovie);
+            Payload<Movie> response = new Payload<Movie>();
+
+            response.data = await repo.DeleteMovieById(id);
+
+            return TypedResults.Ok(response);
         }
     }
 }

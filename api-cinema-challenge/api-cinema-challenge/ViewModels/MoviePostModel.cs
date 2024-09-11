@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using api_cinema_challenge.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api_cinema_challenge.ViewModels
 {
@@ -11,5 +12,7 @@ namespace api_cinema_challenge.ViewModels
         public string description { get; set; }
 
         public int runtimeMins { get; set; }
+        //public List<Screening> screenings { get; set; }
+
     }
 }

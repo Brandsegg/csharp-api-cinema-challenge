@@ -16,7 +16,9 @@ namespace api_cinema_challenge.Repositories
 
         public async Task<Customer> AddCustomer(Customer entity)
         {
+            entity.UpdatedAt = DateTime.UtcNow;
             await _db.Customers.AddAsync(entity);
+
             await _db.SaveChangesAsync();
             return entity;
         }

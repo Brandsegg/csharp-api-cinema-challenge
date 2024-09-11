@@ -19,25 +19,28 @@ namespace api_cinema_challenge.EndPoints
         [ProducesResponseType(StatusCodes.Status200OK)]
         private static async Task<IResult> GetScreenings(IScreeningRepository repo)
         {
-            var result = await repo.GetScreenings();
-            return TypedResults.Ok(result);
+            Payload<List<Screening>> response = new Payload<List<Screening>>();
+
+            response.data =  await repo.GetScreenings();
+            return TypedResults.Ok(response);
         }
 
        
         [ProducesResponseType(StatusCodes.Status201Created)]
-        private static async Task<IResult> AddScreening(IScreeningRepository repo, ScreeningPostModel model)
+        private static async Task<IResult> AddScreening(IScreeningRepository repo, int id, ScreeningPostModel model)
         {
+            Payload<Screening> response = new Payload<Screening>();
             try
             {
-                var result = await repo.AddScreening(new Screening()
+                response.data = await repo.AddScreening(new Screening()
                 {
-                    MovieId = model.MovieId,
+                    MovieId = id,
                     ScreenNumber = model.ScreenNumber,
                     Capacity = model.Capacity,
-                    StartsAt = model.StartsAt
+                    StartsAt = model.StartsAt.ToUniversalTime()
                 });
 
-                return TypedResults.Ok(result);
+                return TypedResults.Ok(response);
             }
             catch (Exception ex)
             {
